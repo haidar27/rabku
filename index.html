@@ -46,6 +46,8 @@
     .top-btn { border:1px solid rgba(255,255,255,.24); border-radius:11px; padding:9px 12px; color:white; background:rgba(255,255,255,.09); font-size:12px; font-weight:700; cursor:pointer; white-space:nowrap; }
     .top-btn:hover { background:rgba(255,255,255,.17); }
     .top-btn.primary { color:var(--green); background:#fff; border-color:#fff; }
+    .top-btn.save-btn { background:rgba(255,255,255,.16); border-color:rgba(255,255,255,.34); }
+    .save-status { color:rgba(255,255,255,.72); font-size:10px; white-space:nowrap; }
     .page { max-width:940px; margin:-34px auto 0; padding:0 18px 44px; }
     .sheet { background:var(--paper); border:1px solid rgba(21,61,51,.06); border-radius:20px; box-shadow:var(--shadow); overflow:hidden; }
     .sheet-head { padding:28px 30px 22px; border-bottom:1px solid var(--line); }
@@ -72,7 +74,7 @@
     .item-name::placeholder { color:#adb6b0; }
     .amount-wrap { display:flex; align-items:center; justify-content:flex-end; gap:8px; border:1px solid transparent; border-radius:8px; padding:0 7px; }
     .currency { color:#87928b; font-size:12px; font-weight:700; }
-    .amount-input { width:100%; min-width:0; text-align:right; border:1px solid transparent; background:transparent; border-radius:8px; outline:none; color:var(--ink); padding:9px 2px; font-variant-numeric:tabular-nums; }
+    .amount-input { width:3ch; min-width:3ch; max-width:100%; flex:0 0 auto; text-align:right; border:1px solid transparent; background:transparent; border-radius:8px; outline:none; color:var(--ink); padding:9px 2px; font-variant-numeric:tabular-nums; }
     .remove-btn { border:0; width:31px; height:31px; border-radius:9px; color:#9aa49e; background:transparent; display:grid; place-items:center; cursor:pointer; margin:auto; }
     .remove-btn:hover { color:var(--danger); background:#fff0f0; }
     .add-btn { display:inline-flex; align-items:center; gap:8px; border:1px solid #d7e4db; background:var(--green-soft); color:var(--green); border-radius:10px; padding:10px 13px; font-weight:800; font-size:12px; cursor:pointer; margin-top:13px; }
@@ -94,8 +96,9 @@
       .brand-mark { width:38px; height:38px; }
       .brand-name { font-size:14px; }
       .brand-caption { font-size:10px; }
-      .top-actions { gap:6px; }
+      .top-actions { gap:6px; flex-wrap:wrap; justify-content:flex-end; }
       .top-btn { padding:9px 10px; font-size:11px; }
+      .save-status { flex-basis:100%; text-align:right; font-size:9px; }
       .page { padding:0 11px 30px; }
       .sheet { border-radius:16px; }
       .sheet-head { padding:23px 18px 19px; }
@@ -143,8 +146,9 @@
       th { color:#48554d !important; }
       td { border-color:#e0e4e1; }
       .item-name, .amount-input { border:0 !important; box-shadow:none !important; color:#111 !important; padding:7px 3px; }
-      .amount-wrap { border:0 !important; }
-      .currency { color:#555 !important; }
+      .amount-wrap { border:0 !important; display:flex !important; width:max-content !important; max-width:100%; margin-left:auto !important; justify-content:flex-end !important; align-items:center !important; gap:3px !important; padding:0 !important; white-space:nowrap; }
+      .currency { color:#555 !important; flex:0 0 auto !important; }
+      .amount-input { flex:0 0 auto !important; min-width:3ch !important; padding:7px 0 !important; text-align:right !important; }
       .action-col, .add-btn, .install-note { display:none !important; }
       .total-panel { background:#163d34 !important; color:#fff !important; border-radius:0; margin-top:17px; padding:16px 18px; }
       .total-label, .total-note { color:#e4eee8 !important; }
@@ -167,7 +171,9 @@
       </div>
       <div class="top-actions">
         <button class="top-btn" id="installBtn" type="button" aria-label="Pasang aplikasi">＋ <span class="btn-long">Pasang</span></button>
+        <button class="top-btn save-btn" id="saveBtn" type="button" aria-label="Simpan data ke perangkat">✓ <span class="btn-long">Simpan</span><span class="save-short">Simpan</span></button>
         <button class="top-btn primary" id="exportBtn" type="button">↓ <span class="btn-long">Ekspor PDF</span><span class="btn-short">PDF</span></button>
+        <span class="save-status" id="saveStatus" role="status" aria-live="polite">Tersimpan otomatis</span>
       </div>
     </div>
   </header>
@@ -195,7 +201,7 @@
 
       <section class="content">
         <div class="section-head">
-          <div><div class="section-title">Daftar Anggaran</div><div class="section-sub">Masukkan nama barang atau kebutuhan beserta nominalnya.</div></div>
+          <div><div class="section-title">Daftar Anggaran</div><div class="section-sub">Masukkan nama barang atau kebutuhan beserta nominalnya. Data tersimpan otomatis di browser perangkat ini.</div></div>
         </div>
         <div class="table-wrap">
           <table aria-label="Daftar barang dan nominal anggaran">
@@ -286,10 +292,31 @@
       function escapeHtml(value) {
         return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
       }
+      function fitAmountInput(input) {
+        if (!input) return;
+        const length = (input.value || '0').length;
+        input.style.width = `${Math.max(3, length)}ch`;
+      }
       function save() {
-        const data = { title: titleInput.value, date: dateInput.value, rows };
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
-        catch (error) { console.warn('Data belum bisa disimpan di perangkat ini.', error); }
+        const data = {
+          version: 1,
+          title: titleInput.value,
+          date: dateInput.value,
+          rows,
+          savedAt: new Date().toISOString()
+        };
+        try {
+          // Penyimpanan lokal browser; tidak memakai database/server apa pun.
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          const status = document.getElementById('saveStatus');
+          if (status) status.textContent = 'Tersimpan di perangkat ini';
+          return true;
+        } catch (error) {
+          console.warn('Data belum bisa disimpan di perangkat ini.', error);
+          const status = document.getElementById('saveStatus');
+          if (status) status.textContent = 'Penyimpanan browser tidak tersedia';
+          return false;
+        }
       }
       function updateTotals() {
         let total = 0n;
@@ -309,6 +336,7 @@
             <td><div class="amount-wrap"><span class="currency">Rp</span><input class="amount-input" type="text" inputmode="numeric" pattern="[0-9.]*" autocomplete="off" aria-label="Nominal item ${index+1}" placeholder="0" value="${formatDigits(row.amount)}"></div></td>
             <td class="action-col"><button class="remove-btn no-print" type="button" aria-label="Hapus item ${index+1}" title="Hapus item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td>`;
           body.appendChild(tr);
+          fitAmountInput(tr.querySelector('.amount-input'));
         });
         updateTotals();
       }
@@ -333,7 +361,14 @@
         if (!dateInput.value) dateInput.value = todayLocal();
         displayTitle.textContent = titleInput.value.trim() || 'Rencana Anggaran Biaya';
         if (!rows.length) rows = [{ id: nextId++, name: '', amount: '' }];
-        renderRows(); save();
+        renderRows();
+        const hadSavedData = (() => {
+          try { return !!localStorage.getItem(STORAGE_KEY); }
+          catch (_) { return false; }
+        })();
+        const status = document.getElementById('saveStatus');
+        if (status && hadSavedData) status.textContent = 'Data dipulihkan dari perangkat ini';
+        save();
       }
 
       body.addEventListener('input', event => {
@@ -349,6 +384,7 @@
           row.amount = digits;
           const formatted = formatDigits(digits);
           event.target.value = formatted;
+          fitAmountInput(event.target);
           try { event.target.setSelectionRange(formatted.length, formatted.length); } catch (_) {}
         }
         updateTotals(); save();
@@ -361,6 +397,11 @@
         renderRows(); save();
       });
       document.getElementById('addItemBtn').addEventListener('click', addRow);
+      document.getElementById('saveBtn').addEventListener('click', () => {
+        const saved = save();
+        const status = document.getElementById('saveStatus');
+        if (status) status.textContent = saved ? 'Berhasil disimpan di perangkat ini' : 'Gagal menyimpan — cek izin browser';
+      });
       titleInput.addEventListener('input', () => {
         displayTitle.textContent = titleInput.value.trim() || 'Rencana Anggaran Biaya';
         save();
@@ -398,12 +439,15 @@
         installMessage.textContent = 'RABKU berhasil ditambahkan ke perangkat.';
         installBtn.style.display = 'none';
       });
+      // Simpan sekali lagi ketika halaman akan ditinggalkan atau di-refresh.
+      window.addEventListener('pagehide', save);
+      window.addEventListener('beforeunload', save);
       restore();
     })();
   </script>
   <style>
-    .btn-short { display:none; }
-    @media (max-width:640px) { .btn-short { display:inline; } }
+    .btn-short, .save-short { display:none; }
+    @media (max-width:640px) { .btn-short, .save-short { display:inline; } }
     @media (max-width:640px) and (min-width:371px) { .top-btn .btn-long { display:none; } }
   </style>
 </body>
