@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#163d34">
+  <meta name="description" content="Aplikasi sederhana untuk membuat Rencana Anggaran Biaya.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="RABKU">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>RABKU — Rencana Anggaran Biaya</title>
+  <link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,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">
+  <link rel="apple-touch-icon" sizes="192x192" href="data:image/png;base64,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">
+  <style>
+    :root {
+      --green: #163d34;
+      --green-2: #245b4c;
+      --green-soft: #e8f0eb;
+      --gold: #e8b14a;
+      --ink: #1d2924;
+      --muted: #78837d;
+      --line: #e5eae6;
+      --paper: #ffffff;
+      --bg: #f3f6f3;
+      --danger: #c45151;
+      --shadow: 0 14px 40px rgba(24, 52, 41, .08);
+    }
+    * { box-sizing: border-box; }
+    html { color-scheme: light; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+    .topbar { background: var(--green); color: white; padding: 18px 20px 56px; }
+    .topbar-inner { max-width: 940px; margin: 0 auto; display:flex; justify-content:space-between; align-items:center; gap:14px; }
+    .brand { display:flex; align-items:center; gap:11px; min-width:0; }
+    .brand-mark { width:42px; height:42px; border-radius:13px; display:grid; place-items:center; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.17); flex:none; }
+    .brand-mark svg { width:25px; height:25px; }
+    .brand-name { font-size:16px; font-weight:800; letter-spacing:.09em; line-height:1.1; }
+    .brand-caption { font-size:11px; color:rgba(255,255,255,.68); margin-top:4px; letter-spacing:.02em; }
+    .top-actions { display:flex; gap:8px; }
+    .top-btn { border:1px solid rgba(255,255,255,.24); border-radius:11px; padding:9px 12px; color:white; background:rgba(255,255,255,.09); font-size:12px; font-weight:700; cursor:pointer; white-space:nowrap; }
+    .top-btn:hover { background:rgba(255,255,255,.17); }
+    .top-btn.primary { color:var(--green); background:#fff; border-color:#fff; }
+    .page { max-width:940px; margin:-34px auto 0; padding:0 18px 44px; }
+    .sheet { background:var(--paper); border:1px solid rgba(21,61,51,.06); border-radius:20px; box-shadow:var(--shadow); overflow:hidden; }
+    .sheet-head { padding:28px 30px 22px; border-bottom:1px solid var(--line); }
+    .eyebrow { color:var(--green-2); text-transform:uppercase; letter-spacing:.13em; font-weight:800; font-size:10px; margin-bottom:9px; }
+    .sheet-head h1 { font-size:clamp(23px,4vw,31px); letter-spacing:-.04em; margin:0; line-height:1.15; }
+    .sheet-head p { color:var(--muted); font-size:13px; margin:9px 0 0; }
+    .meta-grid { display:grid; grid-template-columns:1.5fr 1fr; gap:15px; margin-top:24px; }
+    .field label { display:block; font-size:11px; font-weight:800; letter-spacing:.04em; color:#64716a; margin:0 0 7px 2px; }
+    .field input { width:100%; border:1px solid var(--line); background:#fbfcfb; color:var(--ink); border-radius:11px; padding:12px 13px; outline:none; min-height:45px; }
+    .field input:focus, .item-name:focus, .amount-input:focus { border-color:#7da28e; box-shadow:0 0 0 3px rgba(36,91,76,.09); }
+    .content { padding:24px 30px 28px; }
+    .section-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
+    .section-title { font-size:15px; font-weight:800; letter-spacing:-.02em; }
+    .section-sub { color:var(--muted); font-size:11px; margin-top:4px; }
+    .table-wrap { border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+    table { width:100%; border-collapse:collapse; table-layout:fixed; }
+    thead { background:#f6f8f6; }
+    th { text-align:left; padding:12px 14px; color:#738078; font-size:10px; text-transform:uppercase; letter-spacing:.09em; font-weight:800; }
+    th:nth-child(2) { text-align:right; }
+    th:last-child { width:48px; }
+    td { border-top:1px solid var(--line); padding:9px 10px 9px 14px; vertical-align:middle; }
+    tbody tr:first-child td { border-top:0; }
+    .item-name { width:100%; border:1px solid transparent; background:transparent; border-radius:8px; outline:none; padding:9px 8px; color:var(--ink); min-width:0; }
+    .item-name::placeholder { color:#adb6b0; }
+    .amount-wrap { display:flex; align-items:center; justify-content:flex-end; gap:8px; border:1px solid transparent; border-radius:8px; padding:0 7px; }
+    .currency { color:#87928b; font-size:12px; font-weight:700; }
+    .amount-input { width:100%; min-width:0; text-align:right; border:1px solid transparent; background:transparent; border-radius:8px; outline:none; color:var(--ink); padding:9px 2px; font-variant-numeric:tabular-nums; }
+    .remove-btn { border:0; width:31px; height:31px; border-radius:9px; color:#9aa49e; background:transparent; display:grid; place-items:center; cursor:pointer; margin:auto; }
+    .remove-btn:hover { color:var(--danger); background:#fff0f0; }
+    .add-btn { display:inline-flex; align-items:center; gap:8px; border:1px solid #d7e4db; background:var(--green-soft); color:var(--green); border-radius:10px; padding:10px 13px; font-weight:800; font-size:12px; cursor:pointer; margin-top:13px; }
+    .add-btn:hover { background:#dce9e0; }
+    .add-plus { width:19px; height:19px; display:grid; place-items:center; border-radius:6px; background:var(--green); color:#fff; font-size:17px; line-height:1; }
+    .total-panel { margin-top:23px; background:var(--green); color:white; border-radius:15px; padding:19px 21px; display:flex; align-items:center; justify-content:space-between; gap:14px; }
+    .total-label { color:rgba(255,255,255,.72); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; }
+    .total-note { color:rgba(255,255,255,.55); font-size:11px; margin-top:5px; }
+    .total-value { text-align:right; font-size:clamp(22px,4vw,29px); font-weight:850; letter-spacing:-.04em; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+    .sheet-foot { padding:0 30px 24px; color:#8b958f; font-size:10px; display:flex; justify-content:space-between; gap:10px; }
+    .install-note { display:none; max-width:940px; margin:12px auto 0; padding:0 18px; }
+    .install-note.show { display:block; }
+    .install-note > div { background:#fff8e9; border:1px solid #f2dfb6; color:#74551c; border-radius:11px; padding:11px 13px; font-size:12px; line-height:1.5; }
+    .print-only { display:none; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    @media (max-width:640px) {
+      .topbar { padding:15px 15px 52px; }
+      .topbar-inner { align-items:flex-start; }
+      .brand-mark { width:38px; height:38px; }
+      .brand-name { font-size:14px; }
+      .brand-caption { font-size:10px; }
+      .top-actions { gap:6px; }
+      .top-btn { padding:9px 10px; font-size:11px; }
+      .page { padding:0 11px 30px; }
+      .sheet { border-radius:16px; }
+      .sheet-head { padding:23px 18px 19px; }
+      .meta-grid { grid-template-columns:1fr; gap:12px; margin-top:19px; }
+      .content { padding:20px 14px 22px; }
+      th { padding:11px 8px; font-size:9px; }
+      th:first-child { padding-left:11px; }
+      th:last-child { width:39px; }
+      td { padding:7px 5px 7px 8px; }
+      .item-name { padding:9px 4px; font-size:13px; }
+      .amount-wrap { gap:3px; padding:0 2px; }
+      .currency { font-size:10px; }
+      .amount-input { font-size:13px; padding:9px 1px; }
+      .remove-btn { width:29px; height:29px; }
+      .total-panel { padding:17px 15px; }
+      .sheet-foot { padding:0 18px 20px; font-size:9px; }
+    }
+    @media (max-width:370px) {
+      .brand-caption { display:none; }
+      .top-btn { padding:8px; }
+      .top-btn .btn-long { display:none; }
+      .total-value { font-size:21px; }
+    }
+    @page { size:A4 portrait; margin:15mm; }
+    @media print {
+      :root { --bg:#fff; }
+      html, body { background:#fff !important; color:#111 !important; }
+      body { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .topbar { display:none !important; }
+      .page { max-width:none; margin:0; padding:0; }
+      .sheet { border:0; border-radius:0; box-shadow:none; overflow:visible; }
+      .sheet-head { padding:0 0 17px; border-bottom:1px solid #d9dedb; }
+      .eyebrow { color:#3f6557 !important; }
+      .sheet-head h1 { font-size:25px; }
+      .sheet-head p { color:#555; }
+      .meta-grid { margin-top:17px; grid-template-columns:1.5fr 1fr; }
+      .field label { color:#555; }
+      .meta-grid .field:first-child { display:none; }
+      .meta-grid { grid-template-columns:1fr; }
+      .field input { background:transparent !important; border:0 !important; border-radius:0; padding:5px 0; min-height:0; color:#111 !important; box-shadow:none !important; }
+      .content { padding:20px 0 15px; }
+      .section-head { margin-bottom:10px; }
+      .table-wrap { border:1px solid #d8ded9; border-radius:0; overflow:visible; }
+      thead { background:#f1f4f1 !important; }
+      th { color:#48554d !important; }
+      td { border-color:#e0e4e1; }
+      .item-name, .amount-input { border:0 !important; box-shadow:none !important; color:#111 !important; padding:7px 3px; }
+      .amount-wrap { border:0 !important; }
+      .currency { color:#555 !important; }
+      .action-col, .add-btn, .install-note { display:none !important; }
+      .total-panel { background:#163d34 !important; color:#fff !important; border-radius:0; margin-top:17px; padding:16px 18px; }
+      .total-label, .total-note { color:#e4eee8 !important; }
+      .total-value { color:#fff !important; font-size:24px; }
+      .sheet-foot { padding:15px 0 0; border-top:1px solid #e0e4e1; color:#646c67; }
+      .print-only { display:block !important; }
+      .no-print { display:none !important; }
+      tr { break-inside:avoid; page-break-inside:avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar no-print">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M7 3.8h7l4 4V20a1.3 1.3 0 0 1-1.3 1.3H7A1.3 1.3 0 0 1 5.7 20V5.1A1.3 1.3 0 0 1 7 3.8Z" stroke="white" stroke-width="1.6"/><path d="M14 4v4h4M8.5 12h7M8.5 15.5h5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="m15.8 18 1.2 1.2 2.5-2.8" stroke="#e8b14a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div><div class="brand-name">RABKU</div><div class="brand-caption">Rencana Anggaran Biaya</div></div>
+      </div>
+      <div class="top-actions">
+        <button class="top-btn" id="installBtn" type="button" aria-label="Pasang aplikasi">＋ <span class="btn-long">Pasang</span></button>
+        <button class="top-btn primary" id="exportBtn" type="button">↓ <span class="btn-long">Ekspor PDF</span><span class="btn-short">PDF</span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="install-note" id="installNote" role="status"><div id="installMessage"></div></div>
+
+  <main class="page">
+    <article class="sheet">
+      <div class="sheet-head">
+        <div class="eyebrow">Dokumen Anggaran</div>
+        <h1 id="displayTitle">Rencana Anggaran Biaya</h1>
+        <p>Susun kebutuhan dan hitung total anggaran dengan mudah.</p>
+        <div class="meta-grid">
+          <div class="field">
+            <label for="documentTitle">JUDUL RAB</label>
+            <input id="documentTitle" type="text" maxlength="100" value="Rencana Anggaran Biaya" placeholder="Contoh: Renovasi Dapur">
+          </div>
+          <div class="field">
+            <label for="documentDate">TANGGAL</label>
+            <input id="documentDate" type="date">
+            <span id="printDate" class="print-only"></span>
+          </div>
+        </div>
+      </div>
+
+      <section class="content">
+        <div class="section-head">
+          <div><div class="section-title">Daftar Anggaran</div><div class="section-sub">Masukkan nama barang atau kebutuhan beserta nominalnya.</div></div>
+        </div>
+        <div class="table-wrap">
+          <table aria-label="Daftar barang dan nominal anggaran">
+            <thead><tr><th scope="col">Nama Barang / Keterangan</th><th scope="col">Nominal</th><th scope="col" class="action-col"><span class="sr-only">Hapus</span></th></tr></thead>
+            <tbody id="itemsBody"></tbody>
+          </table>
+        </div>
+        <button class="add-btn no-print" id="addItemBtn" type="button"><span class="add-plus">+</span> Tambah item</button>
+        <div class="total-panel">
+          <div><div class="total-label">Total Anggaran</div><div class="total-note" id="itemCount">0 item terdaftar</div></div>
+          <div class="total-value" id="grandTotal">Rp 0</div>
+        </div>
+      </section>
+      <footer class="sheet-foot">
+        <span>Disusun menggunakan RABKU</span>
+        <span id="footerDate">—</span>
+      </footer>
+    </article>
+  </main>
+
+  <script>
+    (() => {
+      'use strict';
+      const STORAGE_KEY = 'rabku_document_v1';
+      const body = document.getElementById('itemsBody');
+      const titleInput = document.getElementById('documentTitle');
+      const displayTitle = document.getElementById('displayTitle');
+      const dateInput = document.getElementById('documentDate');
+      const grandTotal = document.getElementById('grandTotal');
+      const itemCount = document.getElementById('itemCount');
+      const installBtn = document.getElementById('installBtn');
+      const installNote = document.getElementById('installNote');
+      const installMessage = document.getElementById('installMessage');
+      let rows = [];
+      let deferredInstallPrompt = null;
+      let nextId = 1;
+
+      const icon192 = 'data:image/png;base64,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';
+      const icon512 = 'data:image/png;base64,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';
+      // Manifest dibuat di dalam file HTML agar proyek tetap cukup satu file.
+      try {
+        const manifest = {
+          id: location.href.split('#')[0],
+          name: 'RABKU - Rencana Anggaran Biaya',
+          short_name: 'RABKU',
+          description: 'Aplikasi sederhana untuk menyusun Rencana Anggaran Biaya.',
+          start_url: location.href.split('#')[0],
+          scope: new URL('.', location.href).href,
+          display: 'standalone',
+          orientation: 'portrait',
+          background_color: '#f3f6f3',
+          theme_color: '#163d34',
+          icons: [
+            { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+            { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+          ]
+        };
+        const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+        const manifestLink = document.createElement('link');
+        manifestLink.rel = 'manifest';
+        manifestLink.href = URL.createObjectURL(manifestBlob);
+        document.head.appendChild(manifestLink);
+      } catch (error) {
+        console.warn('Manifest aplikasi tidak dapat disiapkan pada browser ini.', error);
+      }
+
+      function todayLocal() {
+        const d = new Date();
+        return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      }
+      function formatDate(value) {
+        if (!value) return '—';
+        const parts = value.split('-').map(Number);
+        if (parts.length !== 3 || !parts[0]) return '—';
+        return new Date(parts[0], parts[1]-1, parts[2]).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
+      }
+      function digitsOnly(value) { return String(value || '').replace(/\D/g, '').slice(0, 15); }
+      function formatDigits(value) {
+        const digits = digitsOnly(value);
+        if (!digits) return '';
+        try { return new Intl.NumberFormat('id-ID', { maximumFractionDigits:0 }).format(BigInt(digits)); }
+        catch (_) { return digits.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+      }
+      function rupiah(value) {
+        const num = BigInt(digitsOnly(value) || '0');
+        return 'Rp ' + new Intl.NumberFormat('id-ID', { maximumFractionDigits:0 }).format(num);
+      }
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+      }
+      function save() {
+        const data = { title: titleInput.value, date: dateInput.value, rows };
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+        catch (error) { console.warn('Data belum bisa disimpan di perangkat ini.', error); }
+      }
+      function updateTotals() {
+        let total = 0n;
+        rows.forEach(row => { total += BigInt(digitsOnly(row.amount) || '0'); });
+        grandTotal.textContent = 'Rp ' + new Intl.NumberFormat('id-ID', { maximumFractionDigits:0 }).format(total);
+        itemCount.textContent = `${rows.length} item ${rows.length === 1 ? 'terdaftar' : 'terdaftar'}`;
+        document.getElementById('footerDate').textContent = formatDate(dateInput.value);
+        document.getElementById('printDate').textContent = formatDate(dateInput.value);
+      }
+      function renderRows() {
+        body.innerHTML = '';
+        rows.forEach((row, index) => {
+          const tr = document.createElement('tr');
+          tr.dataset.id = String(row.id);
+          tr.innerHTML = `
+            <td><input class="item-name" type="text" maxlength="140" aria-label="Nama barang atau keterangan item ${index+1}" placeholder="Contoh: Semen 5 sak" value="${escapeHtml(row.name)}"></td>
+            <td><div class="amount-wrap"><span class="currency">Rp</span><input class="amount-input" type="text" inputmode="numeric" pattern="[0-9.]*" autocomplete="off" aria-label="Nominal item ${index+1}" placeholder="0" value="${formatDigits(row.amount)}"></div></td>
+            <td class="action-col"><button class="remove-btn no-print" type="button" aria-label="Hapus item ${index+1}" title="Hapus item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button></td>`;
+          body.appendChild(tr);
+        });
+        updateTotals();
+      }
+      function addRow() {
+        rows.push({ id: nextId++, name: '', amount: '' });
+        renderRows(); save();
+        const last = body.lastElementChild;
+        if (last) last.querySelector('.item-name').focus();
+      }
+      function restore() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+          if (saved && typeof saved === 'object') {
+            if (typeof saved.title === 'string') titleInput.value = saved.title;
+            if (typeof saved.date === 'string') dateInput.value = saved.date;
+            if (Array.isArray(saved.rows)) {
+              rows = saved.rows.slice(0, 500).map(row => ({ id: Number(row.id) || nextId++, name: String(row.name || ''), amount: digitsOnly(row.amount) }));
+              nextId = Math.max(0, ...rows.map(row => row.id)) + 1;
+            }
+          }
+        } catch (error) { console.warn('Data tersimpan tidak dapat dibaca.', error); }
+        if (!dateInput.value) dateInput.value = todayLocal();
+        displayTitle.textContent = titleInput.value.trim() || 'Rencana Anggaran Biaya';
+        if (!rows.length) rows = [{ id: nextId++, name: '', amount: '' }];
+        renderRows(); save();
+      }
+
+      body.addEventListener('input', event => {
+        const tr = event.target.closest('tr');
+        if (!tr) return;
+        const row = rows.find(item => item.id === Number(tr.dataset.id));
+        if (!row) return;
+        if (event.target.classList.contains('item-name')) {
+          row.name = event.target.value;
+        } else if (event.target.classList.contains('amount-input')) {
+          const before = event.target.value;
+          const digits = digitsOnly(before);
+          row.amount = digits;
+          const formatted = formatDigits(digits);
+          event.target.value = formatted;
+          try { event.target.setSelectionRange(formatted.length, formatted.length); } catch (_) {}
+        }
+        updateTotals(); save();
+      });
+      body.addEventListener('click', event => {
+        const button = event.target.closest('.remove-btn');
+        if (!button) return;
+        const tr = button.closest('tr');
+        rows = rows.filter(row => row.id !== Number(tr.dataset.id));
+        renderRows(); save();
+      });
+      document.getElementById('addItemBtn').addEventListener('click', addRow);
+      titleInput.addEventListener('input', () => {
+        displayTitle.textContent = titleInput.value.trim() || 'Rencana Anggaran Biaya';
+        save();
+      });
+      dateInput.addEventListener('change', () => { updateTotals(); save(); });
+      document.getElementById('exportBtn').addEventListener('click', () => {
+        const previousTitle = document.title;
+        const safeTitle = (titleInput.value.trim() || 'Rencana Anggaran Biaya').replace(/[\\/:*?"<>|]+/g, '-').slice(0,70);
+        document.title = `${safeTitle} - ${dateInput.value || todayLocal()}`;
+        save();
+        window.print();
+        setTimeout(() => { document.title = previousTitle; }, 1000);
+      });
+      window.addEventListener('beforeinstallprompt', event => {
+        event.preventDefault();
+        deferredInstallPrompt = event;
+        installBtn.style.display = 'inline-block';
+      });
+      installBtn.addEventListener('click', async () => {
+        if (deferredInstallPrompt) {
+          deferredInstallPrompt.prompt();
+          const choice = await deferredInstallPrompt.userChoice;
+          deferredInstallPrompt = null;
+          if (choice && choice.outcome === 'accepted') {
+            installNote.classList.add('show');
+            installMessage.textContent = 'RABKU sedang dipasang ke perangkat.';
+          }
+        } else {
+          installNote.classList.add('show');
+          installMessage.innerHTML = 'Untuk memasang RABKU, buka menu Chrome <strong>⋮</strong>, lalu pilih <strong>Tambahkan ke layar utama</strong> atau <strong>Instal aplikasi</strong>. Pastikan halaman dibuka dari alamat GitHub Pages (HTTPS), bukan dari file HTML lokal.';
+        }
+      });
+      window.addEventListener('appinstalled', () => {
+        installNote.classList.add('show');
+        installMessage.textContent = 'RABKU berhasil ditambahkan ke perangkat.';
+        installBtn.style.display = 'none';
+      });
+      restore();
+    })();
+  </script>
+  <style>
+    .btn-short { display:none; }
+    @media (max-width:640px) { .btn-short { display:inline; } }
+    @media (max-width:640px) and (min-width:371px) { .top-btn .btn-long { display:none; } }
+  </style>
+</body>
+</html>
